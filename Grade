@@ -1,0 +1,98 @@
+#Test Program and Averages
+
+#02/22/2021
+
+#Patrick Graham
+
+#This program takes five test scores input by the user and returns the average. Then this average is used to determine the student's letter grade from A-F. For the purpose of simplicity, letter grades will not inlclude + or - .
+
+
+
+
+def main():
+ 
+  
+  #User inputs five test scores w/ input validation
+  print("Please enter the first test score")
+  gradeOne = float(input())
+  while gradeOne < 0 or gradeOne > 100:
+    print("Please enter the first test score")
+    gradeOne = float(input())
+
+  print("Please enter the second test score")
+  gradeTwo= float(input())
+  while gradeTwo < 0 or gradeTwo > 100:
+    print("Please enter the second test score")
+    gradeTwo = float(input())
+
+  print("Please enter the third test score")
+  gradeThree = float(input())
+  while gradeThree < 0 or gradeThree > 100:
+    print("Please enter the third test score")
+    gradeThree = float(input())
+
+  print("Please enter the fourth test score")
+  gradeFour = float(input())
+  while gradeFour < 0 or gradeFour > 100:
+    print("Please enter the fourth test score")
+    gradeFour = float(input())
+
+  print("Please enter the fifth test score")
+  gradeFive = float(input())
+  while gradeFive < 0 or gradeFive > 100:
+    print("Please enter the fifth test score")
+    gradeFive = float(input())
+
+  average = (calc_average(gradeOne,gradeTwo,gradeThree,gradeFour,gradeFive))
+
+
+  #Output for each test
+  print("\t\t\tTests\n")
+
+  determine_grade(gradeOne)
+  determine_grade(gradeTwo)
+  determine_grade(gradeThree)
+  determine_grade(gradeFour)
+  determine_grade(gradeFive)
+
+  print("------------------------------------")
+  print("------------------------------------")
+  print("\t\t\tAverage\n")
+  determine_grade(average)
+
+  
+
+#Takes the five scores input by the user and calculates the average
+def calc_average(gradeOne,gradeTwo,gradeThree,gradeFour,gradeFive):
+  average = (gradeOne + gradeTwo + gradeThree + 
+             gradeFour + gradeFive) / 5
+
+  
+  return average
+
+#Takes calculated average and prints the correlating letter grade
+def  determine_grade(average):
+  #Shows the score was passed
+  #print(average)
+  if average >=90 and average <= 100:
+    print("Score:\t","{:.1f}".format(average),"\tLetter Grade:\t A")
+  elif average >=80 and average <= 89:
+    print("Score:\t","{:.1f}".format(average),"\tLetter Grade:\t B")
+  elif average >=70 and average <= 79:
+    print("Score:\t","{:.1f}".format(average),"\tLetter Grade:\t C")
+  elif average >=60 and average <= 69:
+    print("Score:\t","{:.1f}".format(average),"\tLetter Grade:\t D")
+  elif average >=0 and average <= 59:
+    print("Score:\t","{:.1f}".format(average),"\tLetter Grade:\t F")
+  return average
+  
+
+
+
+
+
+#Calls main to run this jim-jam
+main()
+
+
+
