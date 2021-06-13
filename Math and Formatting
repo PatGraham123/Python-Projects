@@ -1,0 +1,24 @@
+#      Program 9 - Number Analysis Program Chapter 7
+#
+#      03/02/2021
+#
+#      Patrick Graham
+#
+#      The purpose of this program is to create a list of 20 real numbers then find the max, min, total, and average of these numbers.
+
+numlist = []
+index = 0
+total = 0
+average = 0
+while index < 20:
+  print("Please enter number",index+1,"of 20")
+  number = float(input())
+  total += number
+  numlist.append(number)
+  index += 1
+average = total/len(numlist)
+print(numlist)
+print("The max is:",max(numlist))
+print("The min is:",min(numlist))
+print("The total is:","{:.2f}".format(total))
+print("The average is:","{:.2f}".format(average))
