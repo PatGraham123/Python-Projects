@@ -1,0 +1,130 @@
+#Patrick Graham
+#06/27/2021
+
+#Play some BlackJack then view the results in a pie chart!
+
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+
+class Player:
+  
+  def __init__(self):
+    self.cpuList = []
+    self.roll = 0
+    self.sum = 0
+    self.total = 0
+  def rollDice(self):
+
+    self.roll = random.randrange(1, 11)
+    if self.roll == 1 or self.roll == 11 and self.total <= 10:
+      self.roll = 11
+    if self.roll == 1 or self.roll == 11 and self.total > 10:
+      self.roll = 1
+    self.cpuList.append(self.roll)
+    self.total = self.total + self.roll
+    return self.roll, self.total
+
+
+def Main():
+  
+  tieCount = 0
+  winCount = 0
+  loseCount = 0
+  totalCount = 0
+  playagain = "Y"
+  while playagain == "Y":
+    opponent = Player()
+    user = Player()
+    
+    choice = input("First to 21 without busting wins. Would you like to play? (Y/N): ")
+
+    while str(choice).upper() == "Y" or str(choice).upper() == "YES":
+      while opponent.total < 17:
+        opponent.rollDice()
+      print()
+      print("User Roll, Total: ",str(user.rollDice()))
+      print()
+      choice = input("Would you like to continue? (Y/N): ")
+    if user.total > 21 and opponent.total <= 21:
+      print()
+      print("USER BUST")
+      print("CPU Score:",opponent.total)
+      loseCount += 1
+      totalCount +=1
+    elif opponent.total > 21 and user.total <= 21:
+      print("CPU Score:",opponent.total)
+      print("CPU BUST")
+      winCount += 1
+      totalCount +=1
+    elif user.total > 21 and opponent.total > 21:
+      print("CPU BUST")
+      print("USER BUST")
+      tieCount += 1
+      totalCount +=1
+    if user.total <= 21 and opponent.total <= 21:
+      if user.total > opponent.total:
+        print()
+        print("You Win!")
+        winCount += 1
+        totalCount +=1
+        print("User Score: ",str(user.total))
+        print("CPU Score: ",str(opponent.total))
+      elif user.total < opponent.total:
+        print()
+        print("CPU Wins!")
+        loseCount += 1
+        totalCount +=1
+        print("User Score: ",str(user.total))
+        print("CPU Score: ",str(opponent.total))
+      elif user.total == opponent.total:
+        print()
+        print("TIE")
+        if not(user.total == 0 or opponent.total == 0):
+          tieCount += 1
+          totalCount +=1
+        print("User Score: ",str(user.total))
+        print("CPU Score: ",str(opponent.total))
+    print()
+    print("Win:",winCount)
+    print("Lose:",loseCount)
+    print("Tie:",tieCount)
+    if totalCount <= 0:
+      totalCount = 1
+      print("Total Games:",totalCount)
+    else:  
+      print("Total Games:",totalCount)
+    #For making sure the math adds up    
+    #print(user.cpuList)
+    #print(opponent.cpuList)
+    print()
+    if user.total == 0 or opponent.total == 0:
+      break
+  #After break let's chart the results!
+  if totalCount == 0:
+    #DEFAULTS if a game is not played
+    totalCount = 1
+    
+  x = np.array([(tieCount/totalCount),(winCount/totalCount),(loseCount/totalCount)])
+  
+  if tieCount == 0 and winCount == 0 and loseCount == 0:
+    myLabels = ["","No Data Entered",""]  
+  elif tieCount == 0 and winCount == 0:
+    myLabels = ["","","Lose"]
+  elif tieCount == 0 and loseCount == 0:
+    myLabels = ["","Win",""]
+  elif winCount == 0 and loseCount == 0:
+    myLabels = ["Tie","",""]  
+  elif tieCount == 0:
+    myLabels = ["","Win","Lose"]
+  elif winCount == 0:
+    myLabels = ["Tie","","Lose"]
+  elif loseCount == 0:
+    myLabels = ["Tie","Win",""]
+  else:
+    myLabels = ["Tie","Win","Lose"]
+  plt.pie(x, labels = myLabels, shadow = True)
+  plt.legend(title = "BlackJack", loc = "lower right")
+  plt.show()
+
+Main()  
