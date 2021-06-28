@@ -1,7 +1,9 @@
 #Patrick Graham
 #06/27/2021
 
-#Play some BlackJack then view the results in a pie chart!
+# Play some BlackJack* then view the results in a pie chart!
+
+# *It's Vegas rules baby! Dealer doesnt hit over 17. Have Fun!
 
 import random
 import matplotlib.pyplot as plt
