@@ -4,7 +4,7 @@
 #
 #      Patrick Graham
 #
-#      The purpose of this program is to read the file of numbers     #      into a list, convert the read lines into integers, and add the
+#      The purpose of this program is to read the file of numbers into a list, convert the read lines into integers, and add the
 #      numbers together to get the total.
 
 file = open('numbers.txt', 'r')
